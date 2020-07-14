@@ -9,32 +9,40 @@ import java.util.regex.*;
 public class Solution {
 
     // Complete the minimumBribes function below.
-    static void minimumBribes(int[] q) {
+    static void minimumBribes(int[] arr) {
          int swap = 0;
-       int hash[] =  new int[q.length +1];
-       for(int i=0;i<q.length;i++) {
-            hash[q[i]] = i+1;
-          
-       }
+
+         for(int i=arr.length-1;i>=0;i--)
+         {
+             if(arr[i] != (i+1))
+             {
+                 if(arr[i-1] == (i+1))
+                 {
+
+                     swap = swap+1;
+
+                     swapElem(arr,i-1,i);
+                    
+                 }
+                 else if(arr[i-2] == (i+1))
+                 {
+                     swap = swap+2;
+                     swapElem(arr,i-2,i-1);
+                     swapElem(arr,i-1,i);
+                 }
+                 else{
+                     System.out.println("Too chaotic");
+                     return;
+                 }
+             }
+         }
+         System.out.println(swap);
        
-       for(int key=q.length;key>0;key--) {
-           int val = hash[key];
-           if(Math.abs(val-key) >2) {
-               System.out.println("Too chaotic");
-               return;
-           }
-           for(int i=val;i<key;i++) {
-               int temp = q[i-1];
-               q[i-1] = q[i];
-               q[i] = temp;
-               hash[q[i-1]]--;
-               hash[key]++;
-               swap++;
-           }
-       }
-       System.out.println(swap);
-       
-       
+    }
+    static void swapElem(int[]arr,int i , int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
