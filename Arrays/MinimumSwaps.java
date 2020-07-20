@@ -9,6 +9,8 @@ import java.util.regex.*;
 public class Solution {
 
     // Complete the minimumSwaps function below.
+    
+    // Placing one by one values to its correct index (i-1) i.e Element 1 to 0th index, Element 2 to 1st index..so on from the given array starting from first index value.
     static int minimumSwaps(int[] arr) {
          int n = arr.length - 1;
         int minSwaps = 0;
