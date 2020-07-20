@@ -11,33 +11,41 @@ public class Solution {
     private static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        long N=sc.nextLong();
-                long M=sc.nextLong();
+                int N=sc.nextInt();
+                int M=sc.nextInt();
                 
-                long A[]=new long[(int)N+1];
-                for(int i=1;i<=N;i++) A[i]=0;
+                long A[]=new long[N+2];
                 
-                long max=0,sum=0;;
-                
-                long a;
-                long b;
-                long k;
-                
-                for(int i=1;i<=M;i++)
-                    {
-                        a=sc.nextLong();
-                        b=sc.nextLong();
-                        k=sc.nextLong();
-                        A[(int)a]+=k;
-                        if(b<N)
-                        A[(int)b+1]-=k;
+      
+                int queries[][] = new int[M][3];
+                for(int i=0;i<M;i++)
+                {
+                        queries[i][0]= sc.nextInt();
+                        queries[i][1]= sc.nextInt();
+                        queries[i][2]= sc.nextInt();
+                }
+                        
+                for(int i=0;i<queries.length;i++)
+                {
+                       int a = queries[i][0];
+                       int b = queries[i][1];
+                       int k = queries[i][2];
+                    
+                        A[a]+=k;
+                        A[b+1]-= k;
                     }
-                for(int i=1;i<=N;i++) 
-                    {
-                        sum+=A[i];
-                        if(sum>max)
-                         max=sum;
-                    }
-                System.out.println(max);
+                    long max = findMax(A);
+                    System.out.println(max);
+    }
+    static long findMax(long[] arr)
+    {
+        long sum = 0;
+        long max = Long.MIN_VALUE;
+        for(int i = 0 ; i<arr.length ; i++)
+        {
+            sum += arr[i];
+            max = Math.max(sum,max);
+        }
+        return max;
     }
 }
